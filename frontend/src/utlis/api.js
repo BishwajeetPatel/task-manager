@@ -31,7 +31,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
+      window.location.href = '/';
     }
     return Promise.reject(error);
   }
@@ -59,6 +59,11 @@ export const authAPI = {
 export const tasksAPI = {
   getTasks: async () => {
     const response = await api.get('/tasks');
+    return response.data;
+  },
+  
+  getTask: async (id) => {
+    const response = await api.get(`/tasks/${id}`);
     return response.data;
   },
   
